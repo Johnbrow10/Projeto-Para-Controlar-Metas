@@ -1,4 +1,4 @@
-SEQUENCIA PARA CRIAR O PROJETO
+SEQUENCIA PARA CRIAR E USAR A API.
 
 Criar o arquivo package
 ### npm init
