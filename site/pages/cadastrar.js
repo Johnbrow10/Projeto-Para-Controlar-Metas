@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Jumbotron } from 'reactstrap';
+import { Jumbotron, Container, Form, Button, FormGroup, Label, Input, Alert } from 'reactstrap';
 
+import Menu from '../components/menu';
 
 export default function Cadastrar() {
     // criando uma const com o useState para zerar os valores iniciais antes do formulario ser usado.
@@ -63,32 +64,47 @@ export default function Cadastrar() {
 
     return (
         <>
-            <Jumbotron>
-                <h1>Cadastrar Minha Meta</h1>
-                <hr />
+            <Menu />
+            <Jumbotron fluid className="form">
+                <style>
+                    {`.form{
+                        background-color: #171941;
+                        color: #bf38ac;
+                        padding-top: 30px;
+                        padding-bottom: 241px;
+                        margin-bottom: 0rem !important;
+                    }`}
+                </style>
+                <Container>
+                    <h1 className="display-4 text-center"> Cadastrar Minha Meta</h1>
+                    <hr />
 
-                {/* apresenta a mensagem na tela depedendo da resposta enviada pela api  */}
-                {Response.type === 'error' ? <p>{response.message}</p> : ""}
+                    {/* apresenta a mensagem na tela depedendo da resposta enviada pela api  */}
+                    {Response.type === 'error' ? <Alert color="danger">{response.message}</Alert> : ""}
 
-            {Response.type === 'success' ? <p>{response.message}</p> : ""}
+                    {Response.type === 'success' ? <Alert color="success">{response.message}</Alert> : ""}
 
-                <form onSubmit={sendMeta}>
-                    <label>Nome</label>
-                    <input type="text" name="name" id="name" placeholder="Nome da Meta" onChange={onChangeInput} /><br /><br />
+                    <Form onSubmit={sendMeta}>
+                        <FormGroup>
+                            <Label for="name">Nome</Label>
+                            <Input type="text" name="name" id="name" placeholder="Nome da Meta" onChange={onChangeInput} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="description">Descrição</Label>
+                            <Input type="text" name="description" id="description" placeholder="Descrição da Meta" onChange={onChangeInput} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="status">Status</Label>
+                            <Input type="text" name="status" id="status" placeholder="Status da Meta" onChange={onChangeInput} />
+                        </FormGroup>
 
-                    <label>Descrição</label>
-                    <input type="text" name="description" id="description" placeholder="Descrição da Meta" onChange={onChangeInput} /><br /><br />
+                        {/* Verifica se os dados ja foram enviados para a API ou não. */}
+                        {Response.formSave ? <Button type="submit" disabled color="danger"> Enviando... </Button>
+                            : <Button type="submit" color="primary" outline> Cadastrar </Button>
+                        }
 
-                    <label>Status</label>
-                    <input type="text" name="status" id="status" placeholder="Status" onChange={onChangeInput} /><br /><br />
-
-
-                    {/* Verifica se os dados ja foram enviados para a API ou não. */}
-                    {Response.formSave ?<button type="submit"> Enviando... </button>
-                        : <button type="submit"> Cadastrar </button>
-                    }
-
-                </form>
+                    </Form>
+                </Container>
             </Jumbotron>
         </>
     )
