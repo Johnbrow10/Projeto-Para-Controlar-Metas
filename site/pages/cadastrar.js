@@ -23,6 +23,9 @@ export default function Cadastrar() {
         // esse metodo ele faz que a pagina nao carregue mesmo com o evento acionado
         e.preventDefault();
 
+        // Aqui fixamos um true para esse formSave
+        setResponse({ formSave: true })
+
         // temos um try catch para verificar se foi enviado para a api ou não.
         try {
             // const para verificar se o fetch usou o corpo e os headers necessarios para enviar para a API.
@@ -77,7 +80,12 @@ export default function Cadastrar() {
                 <label>Status</label>
                 <input type="text" name="status" id="status" placeholder="Status" onChange={onChangeInput} /><br /><br />
 
-                <button type="submit"> Cadastrar</button>
+
+                {/* Verifica se os dados ja foram enviados para a API ou não. */}
+                {response.formSave ?
+                    <button type="submit"> Enviando... </button>
+                    : <button type="submit"> Cadastrar </button>
+                }
 
             </form>
         </>
