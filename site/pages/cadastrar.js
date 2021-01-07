@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Jumbotron } from 'reactstrap';
 
 
 export default function Cadastrar() {
@@ -62,32 +63,33 @@ export default function Cadastrar() {
 
     return (
         <>
-            <h1>Cadastrar Minha Meta</h1>
-            <hr />
+            <Jumbotron>
+                <h1>Cadastrar Minha Meta</h1>
+                <hr />
 
-            {/* apresenta a mensagem na tela depedendo da resposta enviada pela api  */}
-            {   Response.type === 'error' ? <p>{response.message}</p> : ""};
+                {/* apresenta a mensagem na tela depedendo da resposta enviada pela api  */}
+                {Response.type === 'error' ? <p>{response.message}</p> : ""}
 
-            {   Response.type === 'success' ? <p>{response.message}</p> : ""}
+            {Response.type === 'success' ? <p>{response.message}</p> : ""}
 
-            <form onSubmit={sendMeta}>
-                <label>Nome</label>
-                <input type="text" name="name" id="name" placeholder="Nome da Meta" onChange={onChangeInput} /><br /><br />
+                <form onSubmit={sendMeta}>
+                    <label>Nome</label>
+                    <input type="text" name="name" id="name" placeholder="Nome da Meta" onChange={onChangeInput} /><br /><br />
 
-                <label>Descrição</label>
-                <input type="text" name="description" id="description" placeholder="Descrição da Meta" onChange={onChangeInput} /><br /><br />
+                    <label>Descrição</label>
+                    <input type="text" name="description" id="description" placeholder="Descrição da Meta" onChange={onChangeInput} /><br /><br />
 
-                <label>Status</label>
-                <input type="text" name="status" id="status" placeholder="Status" onChange={onChangeInput} /><br /><br />
+                    <label>Status</label>
+                    <input type="text" name="status" id="status" placeholder="Status" onChange={onChangeInput} /><br /><br />
 
 
-                {/* Verifica se os dados ja foram enviados para a API ou não. */}
-                {response.formSave ?
-                    <button type="submit"> Enviando... </button>
-                    : <button type="submit"> Cadastrar </button>
-                }
+                    {/* Verifica se os dados ja foram enviados para a API ou não. */}
+                    {Response.formSave ?<button type="submit"> Enviando... </button>
+                        : <button type="submit"> Cadastrar </button>
+                    }
 
-            </form>
+                </form>
+            </Jumbotron>
         </>
     )
 
